@@ -24,7 +24,7 @@
         };
       };
     };
-    
+
   # 1. The Screenshot Shortcut
   dconf.settings = {
     "org/gnome/shell/keybindings" = {
@@ -59,6 +59,28 @@
     initExtra = ''
       # A cleaner, more professional prompt
       PROMPT='%F{yellow}[%n@NixOS:%F{blue}%~%F{yellow}]$%f '
+      
+      nsync() {
+        local msg=$1
+        if [ -z "$msg" ]; then
+          msg="Automated sync: $(date +'%Y-%m-%d %H:%M')"
+        fi
+
+        cd /etc/nixos
+        echo "📂 Staging changes..."
+        sudo git add .
+
+        echo "🏗️  Building system..."
+        if sudo nixos-rebuild switch --flake .#nixos; then
+          echo "✅ Build successful! Saving to GitHub..."
+          sudo git commit -m "$msg"
+          sudo git push origin main
+          echo "🚀 System updated and synced to Cloud."
+        else
+          echo "❌ Build FAILED. Check the errors above. Nothing was pushed to GitHub."
+          return 1
+        fi
+      }
 
       # 1. ADD COMMAND (Local Only)
       addcmd() {
