@@ -15,7 +15,16 @@
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
   # --- YOUR SETTINGS ---
-
+  programs.git = {
+      enable = true;
+      settings = {
+        user = {
+          name = "Asytuyf";
+          email = "nabaoui21@gmail.com";
+        };
+      };
+    };
+    
   # 1. The Screenshot Shortcut
   dconf.settings = {
     "org/gnome/shell/keybindings" = {
@@ -38,18 +47,18 @@
     shellAliases = {
       ll = "ls -l";
       apply = "sudo nixos-rebuild switch";
-      mycmds = "bat ~/.my_cheatsheet.txt || cat ~/.my_cheatsheet.txt";
+      mycmds = "bat ./my_cheatsheet.txt || cat ./my_cheatsheet.txt";
     };
     
     # History settings
     history = {
       size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
+      path = "/home/abdo/.zsh_history";
     };
 
     initExtra = ''
       # A cleaner, more professional prompt
-      PROMPT='%F{yellow}[%n@genesis-vault:%F{blue}%~%F{yellow}]$%f '
+      PROMPT='%F{yellow}[%n@NixOS:%F{blue}%~%F{yellow}]$%f '
 
       # 1. ADD COMMAND (Local Only)
       addcmd() {

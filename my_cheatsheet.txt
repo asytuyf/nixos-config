@@ -1,0 +1,2 @@
+--- GENESIS_VAULT_COMMAND_LOG ---
+[nix] home-manager switch # Applies the new stuff added to home manager
