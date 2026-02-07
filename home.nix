@@ -56,7 +56,7 @@
       path = "/home/abdo/.zsh_history";
     };
 
-    initExtra = ''
+    initContent = ''
       # A cleaner, more professional prompt
       PROMPT='%F{yellow}[%n@NixOS:%F{blue}%~%F{yellow}]$%f '
       
