@@ -41,7 +41,7 @@
 
     shellAliases = {
       ll = "ls -l";
-      mycmds = "cat ./my_cheatsheet.txt";
+      mycmds = "cat /etc/nixos/my_cheatsheet.txt";
     };
     
     history = {
@@ -97,7 +97,7 @@
         jq ". += [{\"cmd\": \"$*\", \"cat\": \"$cat_name\", \"desc\": \"$desc\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"
 
         # Also save to your local text file for 'mycmds'
-        echo "[$cat_name] $* # $desc" >> ~/.my_cheatsheet.txt
+        echo "[$cat_name] $* # $desc" >> /etc/nixos/my_cheatsheet.txt
         
         echo "✅ Saved to local Vault. Run 'vault-sync' to go live."
       }
@@ -118,8 +118,8 @@
         cd - > /dev/null
       }
 
-      if [ ! -f ~/.my_cheatsheet.txt ]; then
-        touch ~/.my_cheatsheet.txt
+      if [ ! -f /etc/nixos/my_cheatsheet.txt ]; then
+        touch /etc/nixos/my_cheatsheet.txt
       fi
     '';
   };
