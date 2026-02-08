@@ -104,14 +104,20 @@
 
       # 2. VAULT SYNC (Commit and Deploy)
       vault-sync() {
+        local msg=$1
+        if [ -z "$msg" ]; then
+          msg="Vault Update: $(date +'%Y-%m-%d %H:%M')"
+        fi
+
         local REPO_PATH="$HOME/personel_projects/directory_website"
         cd "$REPO_PATH"
         
-        git add public/snippets.json
-        git commit -m "Vault Update: Syncing new archive entries"
+        # Add everything (code changes + new json data)
+        git add .
+        git commit -m "$msg"
         git push origin main
         
-        # Deploy to Vercel
+        # Trigger Vercel
         vercel --prod
         
         echo "🚀 Genesis Vault synchronized and deployed."
