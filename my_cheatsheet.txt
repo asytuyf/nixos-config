@@ -1,3 +1,5 @@
 --- GENESIS_VAULT_COMMAND_LOG ---
 [nix] home-manager switch # Applies the new stuff added to home manager
 [nix] nsync message # Build system, apply changes, and auto-sync all configuration files to GitHub.
+[git] vault-sync # Push my new commands to GitHub and trigger the Vercel deploy for my directory website.
+[terminal] mycmds # Quickly view the local cheatsheet of all saved commands in the terminal.
