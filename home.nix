@@ -33,33 +33,26 @@
   };
 
   # --- ZSH CONFIGURATION ---
-  programs.zsh = {
+ programs.zsh = {
     enable = true;
     enableCompletion = true;
-    
-    # THIS is the feature you asked for:
     autosuggestion.enable = true;
-    
-    # Bonus: Makes commands green if they exist, red if they don't
     syntaxHighlighting.enable = true;
 
-    # specific shell aliases (shortcuts)
     shellAliases = {
       ll = "ls -l";
-      apply = "sudo nixos-rebuild switch";
-      mycmds = "bat ./my_cheatsheet.txt || cat ./my_cheatsheet.txt";
+      mycmds = "cat ~/my_cheatsheet.txt";
     };
     
-    # History settings
     history = {
       size = 10000;
       path = "/home/abdo/.zsh_history";
     };
 
+    # We use initContent to stop the deprecation warning
     initContent = ''
-      # A cleaner, more professional prompt
       PROMPT='%F{yellow}[%n@NixOS:%F{blue}%~%F{yellow}]$%f '
-      
+
       nsync() {
         local msg=$1
         if [ -z "$msg" ]; then
@@ -71,13 +64,15 @@
         sudo git add .
 
         echo "🏗️  Building system..."
-        if sudo nixos-rebuild switch --flake .#nixos; then
+        # We use -E here so the build can see your environment
+        if sudo -E nixos-rebuild switch --flake .#nixos; then
           echo "✅ Build successful! Saving to GitHub..."
           sudo git commit -m "$msg"
-          sudo git push origin main
+          # THE FIX: Added -E to use your gh credentials
+          sudo -E git push origin main
           echo "🚀 System updated and synced to Cloud."
         else
-          echo "❌ Build FAILED. Check the errors above. Nothing was pushed to GitHub."
+          echo "❌ Build FAILED. Check errors."
           return 1
         fi
       }
