@@ -112,12 +112,14 @@
         local REPO_PATH="$HOME/personel_projects/directory_website"
         cd "$REPO_PATH"
         
-        # Add everything (code changes + new json data)
+        echo "📥 Checking for web-based updates (deletions)..."
+        git pull origin main --rebase
+
+        echo "📤 Syncing local changes to Cloud..."
         git add .
         git commit -m "$msg"
         git push origin main
         
-        # Trigger Vercel
         vercel --prod
         
         echo "🚀 Genesis Vault synchronized and deployed."
