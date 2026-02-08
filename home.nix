@@ -41,7 +41,7 @@
 
     shellAliases = {
       ll = "ls -l";
-      mycmds = "cat ~/my_cheatsheet.txt";
+      mycmds = "cat ./my_cheatsheet.txt";
     };
     
     history = {
