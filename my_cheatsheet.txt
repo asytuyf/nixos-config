@@ -1,2 +1,3 @@
 --- GENESIS_VAULT_COMMAND_LOG ---
 [nix] home-manager switch # Applies the new stuff added to home manager
+[nix] nsync message # Build system, apply changes, and auto-sync all configuration files to GitHub.
