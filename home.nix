@@ -93,8 +93,8 @@
         echo -n "📝 DESCRIPTION: "
         read desc
 
-        # Structured JSON update
-        jq ". += [{\"cmd\": \"$*\", \"cat\": \"$cat_name\", \"desc\": \"$desc\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"
+        # THE FIX: We create the temp file in /tmp, which is always writable.
+        jq ". += [{\"cmd\": \"$*\", \"cat\": \"$cat_name\", \"desc\": \"$desc\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > /tmp/temp.json && mv /tmp/temp.json "$JSON_FILE"
 
         # Also save to your local text file for 'mycmds'
         echo "[$cat_name] $* # $desc" >> /etc/nixos/my_cheatsheet.txt
