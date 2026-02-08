@@ -77,52 +77,48 @@
         fi
       }
 
-      # 1. ADD COMMAND (Local Only)
+      # 1. ADD COMMAND (Smart Sync)
       addcmd() {
-        # Using 'personel_projects' as per your folder structure
         local REPO_PATH="$HOME/personel_projects/directory_website"
         local JSON_FILE="$REPO_PATH/public/snippets.json"
+        
+        # --- NEW: PULL WEB DELETIONS FIRST ---
+        cd "$REPO_PATH"
+        git pull origin main --rebase > /dev/null 2>&1
 
-        # Check if file exists first
-        if [ ! -f "$JSON_FILE" ]; then
-          echo "[]" > "$JSON_FILE"
-        fi
-
-        echo -n "📁 CATEGORY (nix/git/react/ml): "
+        echo -n "📁 CATEGORY: "
         read cat_name
         echo -n "📝 DESCRIPTION: "
         read desc
 
-        # THE FIX: We create the temp file in /tmp, which is always writable.
+        # Save to JSON
         jq ". += [{\"cmd\": \"$*\", \"cat\": \"$cat_name\", \"desc\": \"$desc\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > /tmp/temp.json && mv /tmp/temp.json "$JSON_FILE"
 
-        # Also save to your local text file for 'mycmds'
+        # Save to text file
         echo "[$cat_name] $* # $desc" >> /etc/nixos/my_cheatsheet.txt
         
-        echo "✅ Saved to local Vault. Run 'vault-sync' to go live."
+        echo "✅ Saved locally. Run 'vault-sync' to go live."
+        cd - > /dev/null
       }
 
-      # 2. VAULT SYNC (Commit and Deploy)
+      # 2. VAULT SYNC (Smart Push)
       vault-sync() {
         local msg=$1
-        if [ -z "$msg" ]; then
-          msg="Vault Update: $(date +'%Y-%m-%d %H:%M')"
-        fi
+        if [ -z "$msg" ]; then msg="Vault Update: $(date +'%Y-%m-%d %H:%M')"; fi
 
         local REPO_PATH="$HOME/personel_projects/directory_website"
         cd "$REPO_PATH"
         
-        echo "📥 Checking for web-based updates (deletions)..."
+        echo "📥 Syncing web deletions..."
         git pull origin main --rebase
 
-        echo "📤 Syncing local changes to Cloud..."
+        echo "📤 Pushing new manifest..."
         git add .
         git commit -m "$msg"
         git push origin main
         
         vercel --prod
-        
-        echo "🚀 Genesis Vault synchronized and deployed."
+        echo "🚀 Genesis Vault live."
         cd - > /dev/null
       }
 
