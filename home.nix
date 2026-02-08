@@ -118,6 +118,38 @@
         cd - > /dev/null
       }
 
+      # 3. ADD GOAL (JSON Version)
+      addgoal() {
+        local REPO_PATH="$HOME/personel_projects/directory_website"
+        local JSON_FILE="$REPO_PATH/public/goals.json"
+
+        # Auto-create if missing
+        if [ ! -f "$JSON_FILE" ]; then echo "[]" > "$JSON_FILE"; fi
+
+        echo -n "🎯 PROJECT (e.g. Website, NixOS, Life): "
+        read project
+        echo -n "🔥 PRIORITY (High/Med/Low): "
+        read priority
+        
+        # Description is the argument you pass: addgoal "Fix the bugs"
+        local task="$*"
+        if [ -z "$task" ]; then
+            echo -n "📝 MISSION DETAILS: "
+            read task
+        fi
+
+        # Use /tmp to avoid permission errors
+        jq ". += [{\"id\": \"$(date +%s)\", \"project\": \"$project\", \"task\": \"$task\", \"priority\": \"$priority\", \"status\": \"PENDING\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > /tmp/goals.json && mv /tmp/goals.json "$JSON_FILE"
+
+        echo "✅ Mission added to log. Run 'vault-sync' to deploy."
+      }
+
+      # 4. EDIT GOALS (Manual JSON Edit)
+      editgoals() {
+        # Opens the file in micro/vim so you can delete lines or change "PENDING" to "DONE"
+        micro ~/personel_projects/directory_website/public/goals.json
+      }
+
       if [ ! -f /etc/nixos/my_cheatsheet.txt ]; then
         touch /etc/nixos/my_cheatsheet.txt
       fi
