@@ -31,9 +31,7 @@
       show-screenshot-ui = [ "<Super>s" ];
     };
   };
-
-  home.sessionPath = [ "$HOME/.cargo/bin" ];
-
+  
   # --- ZSH CONFIGURATION ---
  programs.zsh = {
     enable = true;
