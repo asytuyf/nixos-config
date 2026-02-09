@@ -1,0 +1,9 @@
+name = "htop Red Fire Theme"
+description = "Hot red color scheme for htop - perfect for high performance monitoring"
+category = "themes"
+dependencies = ["htop"]
+files = ["htoprc", "install.sh"]
+
+[compiler]
+type = "make"
+target = "install"

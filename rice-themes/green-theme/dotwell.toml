@@ -1,0 +1,9 @@
+name = "htop Green Forest Theme"
+description = "Calm green color scheme for htop - easy on the eyes"
+category = "themes"
+dependencies = ["htop"]
+files = ["htoprc", "install.sh"]
+
+[compiler]
+type = "make"
+target = "install"

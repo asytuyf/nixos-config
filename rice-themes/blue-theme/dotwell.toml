@@ -1,0 +1,9 @@
+name = "htop Blue Ocean Theme"
+description = "Cool blue color scheme for htop with detailed CPU/memory view"
+category = "themes"
+dependencies = ["htop"]
+files = ["htoprc", "install.sh"]
+
+[compiler]
+type = "make"
+target = "install"
