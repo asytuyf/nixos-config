@@ -128,6 +128,7 @@
   jq
   home-manager
   claude-code
+  fortune
   ];
 
   # 1. Enable Zsh program system-wide
