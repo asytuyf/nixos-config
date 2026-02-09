@@ -129,6 +129,10 @@
   home-manager
   claude-code
   fortune
+  rustc
+  cargo
+  rust-analyzer
+
   ];
 
   # 1. Enable Zsh program system-wide
