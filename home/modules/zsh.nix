@@ -11,6 +11,7 @@
       ll = "ls -l";
       mycmds = "cat /etc/nixos/my_cheatsheet.txt";
       dwell = "cargo run --manifest-path ${config.home.homeDirectory}/personel_projects/dotwell/Cargo.toml --";
+      reveal = "tree -L 2 -C";  # Show directory structure with colors, 2 levels deep
     };
     
     history = {
