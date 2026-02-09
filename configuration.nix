@@ -127,6 +127,7 @@
   bat
   jq
   home-manager
+  claude-code
   ];
 
   # 1. Enable Zsh program system-wide
