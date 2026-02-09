@@ -78,28 +78,35 @@
         fi
       }
 
-      # 1. ADD COMMAND (Smart Sync)
+      # 1. ADD COMMAND (Fixed)
       addcmd() {
         local REPO_PATH="$HOME/personel_projects/directory_website"
         local JSON_FILE="$REPO_PATH/public/snippets.json"
         
-        # --- NEW: PULL WEB DELETIONS FIRST ---
-        cd "$REPO_PATH"
-        git pull origin main --rebase > /dev/null 2>&1
+        # Pull web deletions first to stay in sync
+        (cd "$REPO_PATH" && git pull origin main --rebase > /dev/null 2>&1)
 
         echo -n "📁 CATEGORY: "
         read cat_name
         echo -n "📝 DESCRIPTION: "
         read desc
 
+        # THE FIX: We capture the command itself from the arguments
+        local cmd_to_save="$*"
+        if [ -z "$cmd_to_save" ]; then
+            echo "Error: You must provide a command to save."
+            return 1
+        fi
+
         # Save to JSON
-        jq ". += [{\"cmd\": \"$*\", \"cat\": \"$cat_name\", \"desc\": \"$desc\", \"date\": \"$(date +'%Y-%m-%d')\"}]" "$JSON_FILE" > /tmp/temp.json && mv /tmp/temp.json "$JSON_FILE"
+        jq --arg cmd "$cmd_to_save" --arg cat "$cat_name" --arg desc "$desc" \
+           '. += [{"cmd": $cmd, "cat": $cat, "desc": $desc, "date": "'$(date +'%Y-%m-%d')'"}]' \
+           "$JSON_FILE" > /tmp/temp.json && mv /tmp/temp.json "$JSON_FILE"
 
         # Save to text file
-        echo "[$cat_name] $* # $desc" >> /etc/nixos/my_cheatsheet.txt
+        echo "[$cat_name] $cmd_to_save # $desc" >> /etc/nixos/my_cheatsheet.txt
         
         echo "✅ Saved locally. Run 'vault-sync' to go live."
-        cd - > /dev/null
       }
 
       # 2. VAULT SYNC (Smart Push)
