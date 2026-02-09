@@ -51,6 +51,7 @@
 
     # We use initContent to stop the deprecation warning
     initContent = ''
+      setopt INTERACTIVE_COMMENTS
       PROMPT='%F{yellow}[%n@NixOS:%F{blue}%~%F{yellow}]$%f '
 
       nsync() {

@@ -3,3 +3,4 @@
 [nix] nsync message # Build system, apply changes, and auto-sync all configuration files to GitHub.
 [git] vault-sync # Push my new commands to GitHub and trigger the Vercel deploy for my directory website.
 [terminal] mycmds # Quickly view the local cheatsheet of all saved commands in the terminal.
+[shell] exec zsh # Reloads the Zsh shell to apply new configurations and activate new aliases/functions.
