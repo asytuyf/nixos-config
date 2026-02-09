@@ -1,0 +1,9 @@
+name = "htop Default Theme"
+description = "Original default htop configuration - restore to this if needed"
+category = "themes"
+dependencies = ["htop"]
+files = ["htoprc", "install.sh"]
+
+[compiler]
+type = "make"
+target = "install"
