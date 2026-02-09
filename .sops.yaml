@@ -1,0 +1,14 @@
+# SOPS configuration file
+# This tells sops how to encrypt your secrets
+
+keys:
+  # Your age public key will go here (generated in setup)
+  # Format: &key_abdo age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - &key_abdo REPLACE_WITH_YOUR_AGE_PUBLIC_KEY
+
+creation_rules:
+  # Encrypt everything in secrets/ folder with your key
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *key_abdo

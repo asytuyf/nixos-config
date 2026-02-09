@@ -1,0 +1,18 @@
+# Nix build results
+result
+result-*
+
+# Hardware configuration (machine-specific, auto-generated)
+hardware-configuration.nix
+
+# Sops age key (NEVER commit this!)
+/var/lib/sops-nix/key.txt
+
+# Local state files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Your cheatsheet is personal
+my_cheatsheet.txt

@@ -8,9 +8,13 @@
     # 2. Define Home Manager (Must match the system version)
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # 3. Secrets management with sops-nix
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, sops-nix, ... }@inputs: {
     nixosConfigurations = {
       # "nixos" is the hostname of your machine (check `hostname` in terminal)
       nixos = nixpkgs.lib.nixosSystem {
@@ -18,6 +22,9 @@
         modules = [
           # Import your existing configuration
           ./configuration.nix
+
+          # Import sops-nix module
+          sops-nix.nixosModules.sops
 
           # Import Home Manager Module
           home-manager.nixosModules.home-manager
@@ -28,8 +35,8 @@
             # Pass inputs to home.nix so you can use them there later
             home-manager.extraSpecialArgs = { inherit inputs; };
             
-            # Link your specific home.nix
-            home-manager.users.abdo = import ./home.nix;
+            # Link your specific home.nix (now in home/ folder)
+            home-manager.users.abdo = import ./home/abdo.nix;
           }
         ];
       };
