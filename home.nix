@@ -31,7 +31,7 @@
       show-screenshot-ui = [ "<Super>s" ];
     };
   };
-  
+
   # --- ZSH CONFIGURATION ---
  programs.zsh = {
     enable = true;
@@ -42,6 +42,7 @@
     shellAliases = {
       ll = "ls -l";
       mycmds = "cat /etc/nixos/my_cheatsheet.txt";
+      dwell = "cargo run --manifest-path ${config.home.homeDirectory}/personel_projects/dotwell/Cargo.toml --";
     };
     
     history = {

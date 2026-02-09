@@ -134,6 +134,7 @@
   rust-analyzer
   gcc
   gemini-cli
+  codex
   ];
 
   # 1. Enable Zsh program system-wide
