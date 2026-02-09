@@ -132,7 +132,7 @@
   rustc
   cargo
   rust-analyzer
-
+  gcc
   ];
 
   # 1. Enable Zsh program system-wide
