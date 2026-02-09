@@ -133,6 +133,7 @@
   cargo
   rust-analyzer
   gcc
+  gemini-cli
   ];
 
   # 1. Enable Zsh program system-wide
