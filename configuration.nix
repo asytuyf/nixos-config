@@ -41,6 +41,15 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  # Passwordless sudo for user abdo
+  security.sudo.extraRules = [{
+    users = [ "abdo" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
