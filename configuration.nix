@@ -10,6 +10,7 @@
 
     # Modular configuration
     ./modules/desktop.nix      # GNOME, display, sound, printing
+    ./modules/bspwm-packages.nix  # Packages for bspwm/gh0stzk setup
     ./modules/hyprland.nix     # Hyprland window manager
     ./modules/development.nix  # Dev tools, languages, editors
     ./modules/packages.nix     # General packages, Firefox, unfree
