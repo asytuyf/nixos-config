@@ -4,3 +4,4 @@
 [git] vault-sync # Push my new commands to GitHub and trigger the Vercel deploy for my directory website.
 [terminal] mycmds # Quickly view the local cheatsheet of all saved commands in the terminal.
 [shell] exec zsh # Reloads the Zsh shell to apply new configurations and activate new aliases/functions.
+[Shell] reveal # Reveals the files and the folders inside the current directory and what's inside them
