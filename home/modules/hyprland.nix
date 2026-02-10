@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  # Hyprland keybind helper script
+  # Hyprland packages (help script + session management)
   home.packages = [
+    # Keybind helper
     (pkgs.writeShellScriptBin "hypr-help" ''
       rofi -dmenu -i -p "Hyprland Keybinds" -theme-str 'window {width: 50%;}' << 'HELP'
 ╔═══════════════════════════════════════════════════╗
@@ -37,6 +38,41 @@
 💡 TIP: Click anywhere to close this menu
 HELP
     '')
+
+    # Save session - just save which apps are open
+    (pkgs.writeShellScriptBin "save-session" ''
+      SESSION_FILE="$HOME/.cache/de-session.json"
+      mkdir -p "$(dirname "$SESSION_FILE")"
+
+      if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+        ${pkgs.hyprland}/bin/hyprctl clients -j | ${pkgs.jq}/bin/jq '[.[] | .class]' > "$SESSION_FILE"
+      elif ${pkgs.procps}/bin/pgrep -x gnome-shell > /dev/null; then
+        if command -v wmctrl &> /dev/null; then
+          wmctrl -lx | awk '{print $3}' | cut -d'.' -f2 | ${pkgs.jq}/bin/jq -R . | ${pkgs.jq}/bin/jq -s . > "$SESSION_FILE"
+        fi
+      elif ${pkgs.procps}/bin/pgrep -x bspwm > /dev/null; then
+        ${pkgs.bspwm}/bin/bspc query -N -n .window | while read -r wid; do
+          ${pkgs.xorg.xprop}/bin/xprop -id "$wid" WM_CLASS 2>/dev/null | grep -Po '"\K[^"]+(?=")' | tail -1
+        done | ${pkgs.jq}/bin/jq -R . | ${pkgs.jq}/bin/jq -s . > "$SESSION_FILE"
+      fi
+    '')
+
+    # Restore session - just launch the apps that were open
+    (pkgs.writeShellScriptBin "restore-session" ''
+      SESSION_FILE="$HOME/.cache/de-session.json"
+      [ ! -f "$SESSION_FILE" ] && exit 0
+
+      ${pkgs.jq}/bin/jq -r '.[]' "$SESSION_FILE" | while read -r app; do
+        case "$app" in
+          firefox|Firefox) ${pkgs.firefox}/bin/firefox & ;;
+          kitty|Kitty) ${pkgs.kitty}/bin/kitty & ;;
+          Alacritty|alacritty) ${pkgs.alacritty}/bin/alacritty & ;;
+          org.gnome.Nautilus|nautilus|Nautilus) ${pkgs.nautilus}/bin/nautilus & ;;
+          code|Code) code & ;;
+        esac
+        sleep 0.3
+      done
+    '')
   ];
 
   # Hyprland configuration
@@ -51,10 +87,10 @@ HELP
         "XDG_CURRENT_DESKTOP,Hyprland"
       ];
 
-      # Modifier key (Super/Windows key)
+      # Modifier key
       "$mod" = "SUPER";
 
-      # Monitors (auto-detect)
+      # Monitors
       monitor = ",preferred,auto,1";
 
       # Autostart
@@ -62,7 +98,7 @@ HELP
         "waybar"
         "dunst"
         "hyprpaper"
-        "~/.config/hypr/scripts/restore-session.sh"
+        "restore-session"
         "notify-send 'Hyprland Started' 'Press Super+H for keybind help' -t 5000"
       ];
 
@@ -119,42 +155,28 @@ HELP
         preserve_split = true;
       };
 
-      # === KEYBINDINGS ===
-
+      # Keybindings
       bind = [
-        # HELP
         "$mod, H, exec, hypr-help"
-
-        # Applications
         "$mod, RETURN, exec, kitty"
         "$mod, B, exec, firefox"
         "$mod, E, exec, nautilus"
         "$mod, D, exec, rofi -show drun"
-
-        # Screenshot
         "$mod, S, exec, grimblast copy area"
         "$mod SHIFT, S, exec, grimblast save area ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot saved'"
-
-        # Window management
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, V, togglefloating"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
-
-        # Focus
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
-
-        # Move windows
         "$mod SHIFT, left, movewindow, l"
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, down"
-
-        # Workspaces
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -164,8 +186,6 @@ HELP
         "$mod, 7, workspace, 7"
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
-
-        # Move to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
@@ -175,14 +195,10 @@ HELP
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
-
-        # Special workspace
         "$mod, grave, togglespecialworkspace, magic"
         "$mod SHIFT, grave, movetoworkspace, special:magic"
-
-        # System
         "$mod, L, exec, swaylock"
-        "$mod SHIFT, Q, exit"
+        "$mod SHIFT, Q, exec, save-session && exit"
       ];
 
       # Mouse bindings
@@ -201,7 +217,7 @@ HELP
     };
   };
 
-  # Hyprpaper (wallpaper) config - FIXED
+  # Hyprpaper (wallpaper)
   services.hyprpaper = {
     enable = true;
     settings = {
@@ -210,43 +226,5 @@ HELP
       preload = "/run/current-system/sw/share/backgrounds/gnome/adwaita-l.jxl";
       wallpaper = ",/run/current-system/sw/share/backgrounds/gnome/adwaita-l.jxl";
     };
-  };
-
-  # Session restoration for Hyprland (stored locally, not in git)
-  home.file.".config/hypr/scripts/save-session.sh" = {
-    text = ''
-      #!/usr/bin/env bash
-      SESSION_FILE="$HOME/.cache/hyprland-session.txt"
-      mkdir -p "$(dirname "$SESSION_FILE")"
-      hyprctl clients -j | jq -r '.[] | "\(.class)|\(.workspace.id)"' > "$SESSION_FILE"
-    '';
-    executable = true;
-  };
-
-  home.file.".config/hypr/scripts/restore-session.sh" = {
-    text = ''
-      #!/usr/bin/env bash
-      SESSION_FILE="$HOME/.cache/hyprland-session.txt"
-      if [ -f "$SESSION_FILE" ]; then
-        while IFS='|' read -r class workspace; do
-          case "$class" in
-            kitty|Alacritty)
-              hyprctl dispatch workspace "$workspace" && kitty &
-              ;;
-            firefox)
-              hyprctl dispatch workspace "$workspace" && firefox &
-              ;;
-            org.gnome.Nautilus)
-              hyprctl dispatch workspace "$workspace" && nautilus &
-              ;;
-            Spotify)
-              hyprctl dispatch workspace "$workspace" && spotify &
-              ;;
-          esac
-          sleep 0.5
-        done < "$SESSION_FILE"
-      fi
-    '';
-    executable = true;
   };
 }
