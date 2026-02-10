@@ -46,7 +46,7 @@
 
     # Media and music
     mpd
-    mpc-cli
+    mpc_cli
     ncmpcpp
     mpv
     playerctl
