@@ -37,10 +37,10 @@
         sudo git add .
 
         echo "🏗️  Building system..."
-        if sudo -E nixos-rebuild switch --flake .#nixos; then
+        if sudo nixos-rebuild switch --flake .#nixos; then
           echo "✅ Build successful! Saving to GitHub..."
-          sudo git commit -m "$msg"
-          sudo -E git push origin main
+          sudo git commit -m "$msg" || true
+          sudo git pull --rebase origin main && sudo git push origin main
           echo "🚀 System updated and synced to Cloud."
         else
           echo "❌ Build FAILED. Check errors."
