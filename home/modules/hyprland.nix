@@ -43,6 +43,14 @@ HELP
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      # Environment variables
+      env = [
+        "PATH,/run/current-system/sw/bin:/home/abdo/.nix-profile/bin:$PATH"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "XDG_CURRENT_DESKTOP,Hyprland"
+      ];
+
       # Modifier key (Super/Windows key)
       "$mod" = "SUPER";
 
