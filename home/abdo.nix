@@ -4,6 +4,7 @@
   imports = [
     ./modules/git.nix         # Git configuration
     ./modules/gnome.nix       # GNOME keybindings
+    ./modules/bspwm.nix      # bspwm session management
     ./modules/hyprland.nix    # Hyprland configuration
     ./modules/waybar.nix      # Waybar status bar
     ./modules/zsh.nix         # Zsh with custom functions
