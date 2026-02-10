@@ -25,6 +25,7 @@
     claude-code
     gemini-cli
     codex
+    opencode
 
     # Code editors
     vscode

@@ -22,6 +22,9 @@
           name = "Asytuyf";
           email = "nabaoui21@gmail.com";
         };
+        init = {
+          defaultBranch = "main";
+        };
       };
     };
 
