@@ -65,9 +65,9 @@
     # Clipboard
     clipcat
     
-    # Fonts
-    inconsolata
-    jetbrains-mono
+    # Fonts (Nerd Fonts for proper icon support)
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.inconsolata
     
     # Icons
     papirus-icon-theme

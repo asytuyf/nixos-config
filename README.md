@@ -97,6 +97,7 @@ sops.secrets."ssh-private-key" = {
 
 Rice themes organized by application:
 - `htop/` - Htop color schemes (blue, red, green, default)
+- `bspwm/` - Window manager configuration based on [gh0stzk's bspwm dotfiles](https://github.com/gh0stzk/dotfiles)
 - Managed by my `dwell` tool
 - Future: can add themes for other apps
 
