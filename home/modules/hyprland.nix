@@ -2,7 +2,7 @@
 
 {
   # Hyprland keybind helper script
-  home.packages = [ 
+  home.packages = [
     (pkgs.writeShellScriptBin "hypr-help" ''
       rofi -dmenu -i -p "Hyprland Keybinds" -theme-str 'window {width: 50%;}' << 'HELP'
 ╔═══════════════════════════════════════════════════╗
@@ -24,12 +24,12 @@
   Super + F           → Fullscreen
   Super + V           → Toggle Floating
   Super + L           → Lock Screen
-  
+
 🧭 NAVIGATION
   Super + Arrow Keys  → Move Focus
   Super + 1-9         → Switch Workspace
   Super + Shift + 1-9 → Move Window to Workspace
-  
+
 📌 HELP
   Super + H           → Show This Help
   Super + Shift + Q   → Exit Hyprland (back to GDM)
@@ -45,38 +45,39 @@ HELP
     settings = {
       # Modifier key (Super/Windows key)
       "$mod" = "SUPER";
-      
+
       # Monitors (auto-detect)
       monitor = ",preferred,auto,1";
-      
+
       # Autostart
       exec-once = [
-        "waybar"                                        # Status bar
-        "dunst"                                         # Notifications
-        "hyprpaper"                                     # Wallpaper
-        "notify-send '🎉 Hyprland Started' 'Press Super+H for keybind help' -t 5000"  # Welcome notification
+        "waybar"
+        "dunst"
+        "hyprpaper"
+        "~/.config/hypr/scripts/restore-session.sh"
+        "notify-send 'Hyprland Started' 'Press Super+H for keybind help' -t 5000"
       ];
-      
+
       # Input configuration
       input = {
-        kb_layout = "fr";           # French keyboard (matching your GNOME setup)
+        kb_layout = "fr";
         follow_mouse = 1;
         touchpad = {
           natural_scroll = true;
           tap-to-click = true;
         };
       };
-      
+
       # General appearance
       general = {
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(5bcefaee) rgba(f5a97fee) 45deg";  # Teal gradient
+        "col.active_border" = "rgba(5bcefaee) rgba(f5a97fee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
-      
+
       # Decorations
       decoration = {
         rounding = 8;
@@ -90,7 +91,7 @@ HELP
         shadow_render_power = 3;
         "col.shadow" = "rgba(1a1a1aee)";
       };
-      
+
       # Animations
       animations = {
         enabled = true;
@@ -103,48 +104,48 @@ HELP
           "workspaces, 1, 6, default"
         ];
       };
-      
+
       # Layout
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
-      
+
       # === KEYBINDINGS ===
-      
+
       bind = [
-        # HELP - Show keybind cheatsheet
+        # HELP
         "$mod, H, exec, hypr-help"
-        
+
         # Applications
-        "$mod, RETURN, exec, kitty"                    # Terminal
-        "$mod, B, exec, firefox"                       # Browser
-        "$mod, E, exec, nautilus"                      # File manager
-        "$mod, D, exec, rofi -show drun"              # App launcher
-        
-        # Screenshot (matching your GNOME Super+S)
-        "$mod, S, exec, grimblast copy area"          # Screenshot region to clipboard
+        "$mod, RETURN, exec, kitty"
+        "$mod, B, exec, firefox"
+        "$mod, E, exec, nautilus"
+        "$mod, D, exec, rofi -show drun"
+
+        # Screenshot
+        "$mod, S, exec, grimblast copy area"
         "$mod SHIFT, S, exec, grimblast save area ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot saved'"
-        
+
         # Window management
-        "$mod, Q, killactive"                          # Close window
-        "$mod, F, fullscreen"                          # Fullscreen
-        "$mod, V, togglefloating"                      # Toggle floating
-        "$mod, P, pseudo"                              # Pseudo-tile
-        "$mod, J, togglesplit"                         # Toggle split
-        
+        "$mod, Q, killactive"
+        "$mod, F, fullscreen"
+        "$mod, V, togglefloating"
+        "$mod, P, pseudo"
+        "$mod, J, togglesplit"
+
         # Focus
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
-        
+
         # Move windows
         "$mod SHIFT, left, movewindow, l"
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, down"
-        
+
         # Workspaces
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -155,7 +156,7 @@ HELP
         "$mod, 7, workspace, 7"
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
-        
+
         # Move to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
@@ -166,22 +167,22 @@ HELP
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
-        
-        # Special workspace (scratchpad)
+
+        # Special workspace
         "$mod, grave, togglespecialworkspace, magic"
         "$mod SHIFT, grave, movetoworkspace, special:magic"
-        
+
         # System
-        "$mod, L, exec, swaylock"                      # Lock screen
-        "$mod SHIFT, Q, exit"                          # Exit Hyprland
+        "$mod, L, exec, swaylock"
+        "$mod SHIFT, Q, exit"
       ];
-      
+
       # Mouse bindings
       bindm = [
-        "$mod, mouse:272, movewindow"   # Move window with mouse
-        "$mod, mouse:273, resizewindow" # Resize window with mouse
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
-      
+
       # Window rules
       windowrulev2 = [
         "float, class:(pavucontrol)"
@@ -191,17 +192,53 @@ HELP
       ];
     };
   };
-  
-  # Hyprpaper (wallpaper) config
+
+  # Hyprpaper (wallpaper) config - FIXED
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [
-        "/run/current-system/sw/share/backgrounds/gnome/geometrics-d.jxl"
-      ];
-      wallpaper = [
-        ",/run/current-system/sw/share/backgrounds/gnome/geometrics-d.jxl"
-      ];
+      ipc = "on";
+      splash = false;
+      preload = "/run/current-system/sw/share/backgrounds/gnome/adwaita-l.jxl";
+      wallpaper = ",/run/current-system/sw/share/backgrounds/gnome/adwaita-l.jxl";
     };
+  };
+
+  # Session restoration for Hyprland (stored locally, not in git)
+  home.file.".config/hypr/scripts/save-session.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+      SESSION_FILE="$HOME/.cache/hyprland-session.txt"
+      mkdir -p "$(dirname "$SESSION_FILE")"
+      hyprctl clients -j | jq -r '.[] | "\(.class)|\(.workspace.id)"' > "$SESSION_FILE"
+    '';
+    executable = true;
+  };
+
+  home.file.".config/hypr/scripts/restore-session.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+      SESSION_FILE="$HOME/.cache/hyprland-session.txt"
+      if [ -f "$SESSION_FILE" ]; then
+        while IFS='|' read -r class workspace; do
+          case "$class" in
+            kitty|Alacritty)
+              hyprctl dispatch workspace "$workspace" && kitty &
+              ;;
+            firefox)
+              hyprctl dispatch workspace "$workspace" && firefox &
+              ;;
+            org.gnome.Nautilus)
+              hyprctl dispatch workspace "$workspace" && nautilus &
+              ;;
+            Spotify)
+              hyprctl dispatch workspace "$workspace" && spotify &
+              ;;
+          esac
+          sleep 0.5
+        done < "$SESSION_FILE"
+      fi
+    '';
+    executable = true;
   };
 }
