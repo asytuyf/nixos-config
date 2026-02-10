@@ -11,7 +11,6 @@
     # Modular configuration
     ./modules/desktop.nix      # GNOME, display, sound, printing
     ./modules/hyprland.nix     # Hyprland window manager
-    ./modules/bspwm.nix        # BSPWM window manager (gh0stzk dotfiles)
     ./modules/development.nix  # Dev tools, languages, editors
     ./modules/packages.nix     # General packages, Firefox, unfree
     ./modules/shell.nix        # Zsh configuration

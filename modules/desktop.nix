@@ -5,6 +5,7 @@
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.xserver.windowManager.bspwm.enable = true;
 
   # Keyboard layout
   services.xserver.xkb = {
