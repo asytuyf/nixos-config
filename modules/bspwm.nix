@@ -37,8 +37,8 @@
     kitty
 
     # File managers and utilities
-    thunar
-    tumbler
+    xfce.thunar
+    xfce.tumbler
     gvfs
     pcmanfm
     ranger
@@ -46,7 +46,7 @@
 
     # Media and music
     mpd
-    mpc
+    mpc-cli
     ncmpcpp
     mpv
     playerctl
