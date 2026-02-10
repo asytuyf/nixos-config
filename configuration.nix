@@ -61,8 +61,12 @@
   nix.settings.auto-optimise-store = true;
 
   # Automatic updating (ensure you nsync before reproducing!)
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.dates = "weekly";
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+    flake = "/etc/nixos";
+    flags = [ "--update-input" "nixpkgs" ];
+  };
 
   # NixOS release version
   system.stateVersion = "25.11";
