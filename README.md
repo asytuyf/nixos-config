@@ -181,7 +181,6 @@ Each machine gets its own hardware config, but uses your system config!
 
 ## 📝 Notes to Self
 
-- Old `home.nix` can be deleted once confirmed working
 - Personal projects (directory_website, dotwell) are separate repos
 - System is on NixOS 25.11
 - Keep `/var/lib/sops-nix/key.txt` backed up on USB/cloud!

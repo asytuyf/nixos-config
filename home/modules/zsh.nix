@@ -11,6 +11,8 @@
       ll = "ls -l";
       mycmds = "cat /etc/nixos/my_cheatsheet.txt";
       dwell = "cargo run --manifest-path ${config.home.homeDirectory}/personel_projects/dotwell/Cargo.toml --";
+      nupdate = "sudo nix flake update /etc/nixos && sudo -E nixos-rebuild switch --flake '/etc/nixos#nixos'";
+      nupdate-sync = "sudo nix flake update /etc/nixos && nsync";
       reveal = "tree -L 2 -C";  # Show directory structure with colors, 2 levels deep
     };
     
