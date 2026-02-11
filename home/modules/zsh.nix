@@ -151,13 +151,21 @@ PY2
         local REPO_PATH="$HOME/personel_projects/directory_website"
         cd "$REPO_PATH"
         
-        echo "📥 Syncing web deletions..."
-        git pull origin main --rebase
+        if git diff --quiet && git diff --cached --quiet; then
+          echo "📥 Syncing web deletions..."
+          git pull origin main --rebase
+        else
+          echo "🟡 Skipping pull: working tree not clean."
+        fi
 
         echo "📤 Pushing new manifest..."
         git add .
-        git commit -m "$msg"
-        git push origin main
+        if git diff --cached --quiet; then
+          echo "🟡 No changes to push."
+        else
+          git commit -m "$msg"
+          git push origin main
+        fi
         
         vercel --prod
         echo "🚀 Genesis Vault live."
