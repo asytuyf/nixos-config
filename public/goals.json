@@ -8,14 +8,6 @@
     "date": "2026-02-08"
   },
   {
-    "id": "1770591876",
-    "project": "Website",
-    "task": "Make the command vault page have the bar at the top and buttom",
-    "priority": "High",
-    "status": "PENDING",
-    "date": "2026-02-09"
-  },
-  {
     "id": "1770594775",
     "project": "Website",
     "task": "Add a poge to track stuff that i'm intrested in like LLMs rankings",
