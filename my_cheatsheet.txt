@@ -5,3 +5,8 @@
 [terminal] mycmds # Quickly view the local cheatsheet of all saved commands in the terminal.
 [shell] exec zsh # Reloads the Zsh shell to apply new configurations and activate new aliases/functions.
 [Shell] reveal # Reveals the files and the folders inside the current directory and what's inside them
+[NixOS] nupdate # Update flake.lock and rebuild system
+[NixOS] nupdate-sync # Update flake.lock then nsync (commit + push)
+[NixOS] nsync "message" # Rebuild + commit + push /etc/nixos
+[NixOS] nstat # Show /etc/nixos status, flake.lock changes, current system
+[NixOS] nclean # Manual GC + store optimise

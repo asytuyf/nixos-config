@@ -11,8 +11,6 @@
       ll = "ls -l";
       mycmds = "cat /etc/nixos/my_cheatsheet.txt";
       dwell = "cargo run --manifest-path ${config.home.homeDirectory}/personel_projects/dotwell/Cargo.toml --";
-      nupdate = "sudo nix flake update /etc/nixos && sudo -E nixos-rebuild switch --flake '/etc/nixos#nixos'";
-      nupdate-sync = "sudo nix flake update /etc/nixos && nsync";
       reveal = "tree -L 2 -C";  # Show directory structure with colors, 2 levels deep
     };
     
@@ -39,15 +37,83 @@
         sudo git add .
 
         echo "🏗️  Building system..."
-        if sudo nixos-rebuild switch --flake .#nixos; then
+        if sudo -E nixos-rebuild switch --flake .#nixos; then
+          if sudo git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+            return 0
+          fi
+
           echo "✅ Build successful! Saving to GitHub..."
-          sudo git commit -m "$msg" || true
-          sudo git pull --rebase origin main && sudo git push origin main
+          sudo git commit -m "$msg"
+          sudo -E git pull --rebase origin main
+          sudo -E git push origin main
           echo "🚀 System updated and synced to Cloud."
         else
           echo "❌ Build FAILED. Check errors."
           return 1
         fi
+      }
+
+      nupdate() {
+        sudo nix flake update /etc/nixos && sudo -E nixos-rebuild switch --flake /etc/nixos#nixos
+      }
+
+      nupdate-sync() {
+        sudo nix flake update /etc/nixos && nsync "$@"
+      }
+
+      nstat() {
+        local repo="/etc/nixos"
+        echo "== /etc/nixos git status =="
+        git -C "$repo" status -sb
+
+        echo "== flake.lock input revs =="
+        python - <<'PY2'
+import json, subprocess
+from pathlib import Path
+repo = '/etc/nixos'
+
+def load(text):
+    return json.loads(text)
+
+def revs(data):
+    out = {}
+    for k, v in data.get('nodes', {}).items():
+        locked = v.get('locked', {})
+        if 'rev' in locked:
+            out[k] = locked['rev'][:7]
+    return out
+
+wt = load(Path(f"{repo}/flake.lock").read_text())
+wt_revs = revs(wt)
+try:
+    head_text = subprocess.check_output(["git", "-C", repo, "show", "HEAD:flake.lock"], text=True)
+    head_revs = revs(load(head_text))
+    changed = []
+    for k in sorted(set(wt_revs) | set(head_revs)):
+        if wt_revs.get(k) != head_revs.get(k):
+            changed.append((k, head_revs.get(k, '-'), wt_revs.get(k, '-')))
+    if changed:
+        for k, old, new in changed:
+            if k in {"nixpkgs", "home-manager", "sops-nix"}:
+                print(f"{k}: {old} -> {new}")
+        if not any(k in {"nixpkgs", "home-manager", "sops-nix"} for k, _, _ in changed):
+            print("flake.lock changed (no core inputs changed)")
+    else:
+        print("flake.lock: no rev changes from HEAD")
+except subprocess.CalledProcessError:
+    print("flake.lock: no HEAD to compare")
+PY2
+
+        echo "== current system =="
+        readlink -f /run/current-system
+      }
+
+      nclean() {
+        echo "🧹 Garbage collecting old generations..."
+        sudo nix-collect-garbage --delete-older-than 10d
+        echo "🧽 Optimizing store..."
+        sudo nix store optimise
       }
 
       # addcmd: Add command to personal vault
