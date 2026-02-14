@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.gnomeExtensions.another-window-session-manager
-  ];
-
   dconf.settings = {
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui = [ "<Super>s" ];
@@ -38,12 +34,7 @@
         "gTile@vibou"
         "paperwm@paperwm.github.com"
         "blur-my-shell@aunetx"
-        "another-window-session-manager@nicke.github.io"
       ];
-    };
-
-    "org/gnome/shell/extensions/another-window-session-manager" = {
-      restore-previous-session-at-startup = true;
     };
 
     "org/gnome/desktop/session" = {
