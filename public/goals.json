@@ -1,13 +1,5 @@
 [
   {
-    "id": "1770576915",
-    "project": "Website",
-    "task": "Make the todo list be usable from somewhere elese",
-    "priority": "Med",
-    "status": "PENDING",
-    "date": "2026-02-08"
-  },
-  {
     "id": "1770591876",
     "project": "Website",
     "task": "Make the command vault page have the bar at the top and buttom",
