@@ -1,34 +1,37 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # General system packages
   environment.systemPackages = with pkgs; [
-    # Terminal utilities
+    # Terminal utilities (work everywhere)
     wget
     curl
     htop
-    btop          # Better htop with GPU/network/disk monitoring
+    btop
     fastfetch
     bat
     jq
     unzip
     ranger
     fortune
-    tree          # Directory visualization
-    python3       # Python for scripts
+    tree
+    python3
 
     # Terminal emulator
     kitty
 
-    # Entertainment
+    # Music (Spotify works on ARM)
     spotify
-    steam
-    hydralauncher
-    spicetify-cli
 
     # System utilities
     gparted
     home-manager
+  ]
+  # x86-only packages (Steam, game launchers)
+  ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
+    steam
+    hydralauncher
+    spicetify-cli
   ];
 
   # Enable Firefox

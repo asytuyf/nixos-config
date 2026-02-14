@@ -33,6 +33,8 @@
       # x86_64 (Intel/AMD) - for regular PCs and VMs
       nixos = mkSystem "x86_64-linux";
 
+      # aarch64 (ARM64) - for Apple Silicon VMs, Raspberry Pi, etc.
+      nixos-arm = mkSystem "aarch64-linux";
     };
   };
 }
