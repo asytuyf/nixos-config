@@ -1,12 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
-let
-  isSupported = pkg: lib.meta.availableOn pkgs.stdenv.hostPlatform pkg && !(pkg.meta.broken or false);
-  onlySupported = pkgsList: lib.filter isSupported pkgsList;
-in
 {
   # General system packages
-  environment.systemPackages = onlySupported (with pkgs; [
+  environment.systemPackages = with pkgs; [
     # Terminal utilities
     wget
     curl
@@ -33,7 +29,7 @@ in
     # System utilities
     gparted
     home-manager
-  ]);
+  ];
 
   # Enable Firefox
   programs.firefox.enable = true;
