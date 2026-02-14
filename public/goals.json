@@ -84,5 +84,12 @@
     "project": "Project Ideas",
     "priority": "Low",
     "date": "2026-02-14"
+  },
+  {
+    "id": "1771089896832",
+    "task": "Fix copy paste issue within nixos vms and session save",
+    "project": "Nios",
+    "priority": "Medium",
+    "date": "2026-02-14"
   }
 ]
