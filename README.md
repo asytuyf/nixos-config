@@ -149,7 +149,12 @@ sudo sops secrets/secrets.yaml
 4. **Build system:**
    ```bash
    cd /etc/nixos
-   sudo nixos-rebuild switch --flake .#nixos
+   sudo nixos-rebuild switch --flake .#nixos-$(uname -m)
+   ```
+
+   **Installer environment (fresh install):**
+   ```bash
+   sudo nixos-install --flake /mnt/etc/nixos#nixos-$(uname -m)
    ```
 
 5. **Set password:**

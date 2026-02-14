@@ -37,7 +37,7 @@
         sudo git add .
 
         echo "🏗️  Building system..."
-        if sudo -E nixos-rebuild switch --flake .#nixos; then
+        if sudo -E nixos-rebuild switch --flake .#nixos-$(uname -m); then
           if sudo git diff --cached --quiet; then
             echo "🟡 No changes to commit."
             return 0
@@ -55,7 +55,7 @@
       }
 
       nupdate() {
-        sudo nix flake update /etc/nixos && sudo -E nixos-rebuild switch --flake /etc/nixos#nixos
+        sudo nix flake update /etc/nixos && sudo -E nixos-rebuild switch --flake /etc/nixos#nixos-$(uname -m)
       }
 
       nupdate-sync() {
