@@ -29,7 +29,19 @@
     "task": "GEt gemini trial for 1 year using uni email and link it to my personel gmail maybe",
     "priority": "Med",
     "status": "PENDING",
-    "date": "2026-02-09"
+    "date": "2026-02-09",
+    "subgoals": [
+      {
+        "id": "1771030451348",
+        "text": "omg",
+        "completed": false
+      },
+      {
+        "id": "1771030454822",
+        "text": "wowowwo",
+        "completed": false
+      }
+    ]
   },
   {
     "id": "1770682881",
