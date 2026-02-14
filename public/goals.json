@@ -37,6 +37,33 @@
     "task": "Make the explorer tab be moveable and closed by clicking a certain button but make it reset to be revealed by hover",
     "priority": "Med",
     "status": "PENDING",
-    "date": "2026-02-10"
+    "date": "2026-02-10",
+    "subgoals": [
+      {
+        "id": "1771030407262",
+        "text": "Test subtask",
+        "completed": false
+      },
+      {
+        "id": "1771030414060",
+        "text": "helloo",
+        "completed": false
+      },
+      {
+        "id": "1771030418211",
+        "text": "amazing",
+        "completed": false
+      },
+      {
+        "id": "1771030423674",
+        "text": "beauty",
+        "completed": false
+      },
+      {
+        "id": "1771030427682",
+        "text": "messi",
+        "completed": false
+      }
+    ]
   }
 ]
