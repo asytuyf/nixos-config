@@ -40,5 +40,12 @@
     "project": "Nios",
     "priority": "Medium",
     "date": "2026-02-14"
+  },
+  {
+    "id": "1771259598388",
+    "task": "Make a nixos config for my mac arm because the one i have is x86_64",
+    "project": "NixOS",
+    "priority": "Medium",
+    "date": "2026-02-16"
   }
 ]
