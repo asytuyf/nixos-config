@@ -4,7 +4,7 @@
 {
   # Install all packages needed for the dotfiles
   environment.systemPackages = with pkgs; [
-    # Core bspwm components (already installed via services.xserver.windowManager.bspwm)
+    # Core bspwm components
     sxhkd
     polybar
     picom

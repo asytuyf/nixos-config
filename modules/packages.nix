@@ -1,9 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   # General system packages
   environment.systemPackages = with pkgs; [
-    # Terminal utilities (work everywhere)
+    # Terminal utilities
     wget
     curl
     htop
@@ -20,15 +20,14 @@
     # Terminal emulator
     kitty
 
-    # Music (Spotify works on ARM)
+    # Music
     spotify
 
     # System utilities
     gparted
     home-manager
-  ]
-  # x86-only packages (Steam, game launchers)
-  ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
+
+    # Gaming
     steam
     hydralauncher
     spicetify-cli

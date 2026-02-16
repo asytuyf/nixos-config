@@ -1,5 +1,5 @@
 {
-  description = "Abdo's NixOS Configuration";
+  description = "Abdo's NixOS Configuration (x86_64)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -12,10 +12,9 @@
   };
 
   outputs = { self, nixpkgs, home-manager, sops-nix, ... }@inputs:
-  let
-    # Helper function to create a NixOS config for any architecture
-    mkSystem = system: nixpkgs.lib.nixosSystem {
-      inherit system;
+  {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       modules = [
         ./configuration.nix
         sops-nix.nixosModules.sops
@@ -27,14 +26,6 @@
           home-manager.users.abdo = import ./home/abdo.nix;
         }
       ];
-    };
-  in {
-    nixosConfigurations = {
-      # x86_64 (Intel/AMD) - for regular PCs and VMs
-      nixos = mkSystem "x86_64-linux";
-
-      # aarch64 (ARM64) - for Apple Silicon VMs, Raspberry Pi, etc.
-      nixos-arm = mkSystem "aarch64-linux";
     };
   };
 }
