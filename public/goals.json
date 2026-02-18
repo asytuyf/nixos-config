@@ -47,5 +47,12 @@
     "project": "NixOS",
     "priority": "Medium",
     "date": "2026-02-16"
+  },
+  {
+    "id": "1771452644572",
+    "task": "Makes bsp proposal and find tutor (ASAP)",
+    "project": "Uni",
+    "priority": "High",
+    "date": "2026-02-18"
   }
 ]
