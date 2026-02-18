@@ -59,5 +59,12 @@
         "completed": false
       }
     ]
+  },
+  {
+    "id": "1771453008072",
+    "task": "Add session tasks for the tracker page",
+    "project": "Website",
+    "priority": "Medium",
+    "date": "2026-02-18"
   }
 ]
