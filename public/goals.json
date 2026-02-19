@@ -66,5 +66,12 @@
     "project": "Website",
     "priority": "Medium",
     "date": "2026-02-18"
+  },
+  {
+    "id": "1771491986362",
+    "task": "Add a page for personal made tutorials",
+    "project": "Website",
+    "priority": "Low",
+    "date": "2026-02-19"
   }
 ]
