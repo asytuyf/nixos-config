@@ -26,6 +26,7 @@
     # System utilities
     gparted
     home-manager
+    dysk
 
     # Gaming
     steam
