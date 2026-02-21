@@ -23,7 +23,7 @@
 
     # AI tools
     claude-code
-    gemini-cli
+    gemini-cli-bin
     opencode
 
     # Code editors
