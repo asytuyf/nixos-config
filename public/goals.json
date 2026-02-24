@@ -73,5 +73,12 @@
     "project": "Website",
     "priority": "Medium",
     "date": "2026-02-23"
+  },
+  {
+    "id": "1771955642014",
+    "task": "Make deleting tasks also fast or at least in memory so i will happen",
+    "project": "Website",
+    "priority": "Medium",
+    "date": "2026-02-24"
   }
 ]
