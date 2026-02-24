@@ -17,12 +17,14 @@
       "id": "1771955895763",
       "name": "Creatine 7 days loading (20g/4 doses)",
       "color": "purple",
-      "history": [],
+      "history": [
+        "2026-02-23"
+      ],
       "recurrence": {
         "type": "days",
         "interval": 1
       }
     }
   ],
-  "lastUpdated": "2026-02-24T17:58:16.011Z"
+  "lastUpdated": "2026-02-24T17:58:19.664Z"
 }
