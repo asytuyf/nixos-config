@@ -5,7 +5,8 @@
       "name": "Gym",
       "color": "emerald",
       "history": [
-        "2026-02-21"
+        "2026-02-21",
+        "2026-02-23"
       ],
       "recurrence": {
         "type": "days",
@@ -13,5 +14,5 @@
       }
     }
   ],
-  "lastUpdated": "2026-02-24T17:57:15.670Z"
+  "lastUpdated": "2026-02-24T17:57:17.281Z"
 }
