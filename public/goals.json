@@ -87,5 +87,12 @@
     "project": "Fun",
     "priority": "Medium",
     "date": "2026-02-24"
+  },
+  {
+    "id": "1771955989170",
+    "task": "In track page streaks on the first days should say 1 day streak and we need custom streaks like sometimes a task will only be done each 2 days",
+    "project": "Website",
+    "priority": "Medium",
+    "date": "2026-02-24"
   }
 ]
