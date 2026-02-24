@@ -80,5 +80,12 @@
     "project": "Fun",
     "priority": "Medium",
     "date": "2026-02-24"
+  },
+  {
+    "id": "1771956545599",
+    "task": "Fix streaks & decrypencies between the insects and the vercel website",
+    "project": "Website",
+    "priority": "Medium",
+    "date": "2026-02-24"
   }
 ]
