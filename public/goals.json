@@ -66,5 +66,12 @@
     "project": "Website",
     "priority": "Medium",
     "date": "2026-02-20"
+  },
+  {
+    "id": "1771879929233",
+    "task": "Fix slow updates on track page and add every two days, weekly, monthly tasks",
+    "project": "Website",
+    "priority": "Medium",
+    "date": "2026-02-23"
   }
 ]
