@@ -1,4 +1,15 @@
 {
-  "habits": [],
-  "lastUpdated": "2026-02-24T17:49:21.018Z"
+  "habits": [
+    {
+      "id": "1771955828033",
+      "name": "Gym",
+      "color": "emerald",
+      "history": [],
+      "recurrence": {
+        "type": "days",
+        "interval": 2
+      }
+    }
+  ],
+  "lastUpdated": "2026-02-24T17:57:08.247Z"
 }
