@@ -1,0 +1,12 @@
+{
+  "habits": [
+    {
+      "id": "1771955252277",
+      "name": "test",
+      "color": "emerald",
+      "history": [],
+      "recurrence": "daily"
+    }
+  ],
+  "lastUpdated": "2026-02-24T17:47:32.532Z"
+}
