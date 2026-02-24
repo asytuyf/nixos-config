@@ -68,13 +68,6 @@
     "date": "2026-02-20"
   },
   {
-    "id": "1771879929233",
-    "task": "Fix slow updates on track page and add every two days, weekly, monthly tasks",
-    "project": "Website",
-    "priority": "Medium",
-    "date": "2026-02-23"
-  },
-  {
     "id": "1771955642014",
     "task": "Make deleting tasks also fast or at least in memory so i will happen",
     "project": "Website",
@@ -85,13 +78,6 @@
     "id": "1771955700837",
     "task": "Finish childhood's end tv show",
     "project": "Fun",
-    "priority": "Medium",
-    "date": "2026-02-24"
-  },
-  {
-    "id": "1771955989170",
-    "task": "In track page streaks on the first days should say 1 day streak and we need custom streaks like sometimes a task will only be done each 2 days",
-    "project": "Website",
     "priority": "Medium",
     "date": "2026-02-24"
   }
