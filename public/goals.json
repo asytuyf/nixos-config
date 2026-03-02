@@ -80,5 +80,12 @@
     "project": "Uni",
     "priority": "High",
     "date": "2026-03-02"
+  },
+  {
+    "id": "1772467330204",
+    "task": "Make the deadline option for adding a task better / add a description for the task",
+    "project": "GLOBAL",
+    "priority": "Medium",
+    "date": "2026-03-02"
   }
 ]
