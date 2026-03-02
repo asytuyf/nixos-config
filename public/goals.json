@@ -94,5 +94,12 @@
     "project": "Uni",
     "priority": "Medium",
     "date": "2026-03-02"
+  },
+  {
+    "id": "1772468511464",
+    "task": "Make it possible to change tasks like text",
+    "project": "Website",
+    "priority": "High",
+    "date": "2026-03-02"
   }
 ]
