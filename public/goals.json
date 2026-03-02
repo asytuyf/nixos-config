@@ -73,5 +73,12 @@
     "project": "Drift Hub",
     "priority": "Medium",
     "date": "2026-02-26"
+  },
+  {
+    "id": "1772467247748",
+    "task": "Ask for masters application if needed from bachelor",
+    "project": "Uni",
+    "priority": "High",
+    "date": "2026-03-02"
   }
 ]
