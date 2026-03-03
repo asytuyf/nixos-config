@@ -79,6 +79,8 @@
     "task": "TCS ask question about midterm",
     "project": "Uni",
     "priority": "Medium",
-    "date": "2026-03-02"
+    "date": "2026-03-02",
+    "subgoals": [],
+    "description": "10th march 12:00 - 13:00, MSA 2.380"
   }
 ]
