@@ -82,5 +82,12 @@
     "date": "2026-03-02",
     "subgoals": [],
     "description": "10th march 12:00 - 13:00, MSA 2.380"
+  },
+  {
+    "id": "1772502122280",
+    "task": "Make deadline of task 24h format",
+    "project": "GLOBAL",
+    "priority": "Medium",
+    "date": "2026-03-03"
   }
 ]
