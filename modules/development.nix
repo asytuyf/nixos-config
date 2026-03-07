@@ -25,6 +25,7 @@
     claude-code
     gemini-cli-bin
     opencode
+    antigravity
 
     # Code editors
     vscode
