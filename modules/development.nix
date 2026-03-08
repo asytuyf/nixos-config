@@ -28,6 +28,25 @@
     antigravity
 
     # Code editors
+
+    # LaTeX (for PDF notes generation)
+    (texlive.combine {
+      inherit (texlive)
+        scheme-basic
+        latex
+        xetex
+        latexmk
+        collection-latexextra
+        collection-fontsrecommended
+        collection-mathscience
+        parskip
+        geometry
+        fancyhdr
+        hyperref
+        xcolor;
+    })
+    pandoc
+
     vscode
     micro
     vim
