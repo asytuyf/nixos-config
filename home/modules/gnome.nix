@@ -37,6 +37,13 @@
       ];
     };
 
+    # Screenshot settings - copy to clipboard by default
+    "org/gnome/gnome-screenshot" = {
+      auto-save-directory = "file:///home/abdo/Pictures/Screenshots";
+      include-pointer = false;
+      delay = 0;
+    };
+
     "org/gnome/desktop/session" = {
       idle-delay = 0;
     };

@@ -18,6 +18,13 @@
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     gnome-extension-manager
+    
+    # Clipboard tools (essential for copy/paste to work in web apps)
+    wl-clipboard      # Wayland clipboard (wl-copy, wl-paste)
+    xclip             # X11 clipboard fallback
+    
+    # Screenshot tools
+    gnome-screenshot  # GNOME screenshot utility
   ];
 
   # Sound with PipeWire
