@@ -37,15 +37,52 @@
       ];
     };
 
-    # Screenshot settings - copy to clipboard by default
+    # Dark theme for GNOME and apps
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
+      icon-theme = "Adwaita";
+    };
+
+    # Screenshot settings
     "org/gnome/gnome-screenshot" = {
       auto-save-directory = "file:///home/abdo/Pictures/Screenshots";
       include-pointer = false;
       delay = 0;
     };
 
+    # Disable screen timeout and sleep
     "org/gnome/desktop/session" = {
-      idle-delay = 0;
+      idle-delay = 0;  # 0 = never go idle
     };
+
+    # Disable screen blanking
+    "org/gnome/desktop/screensaver" = {
+      lock-enabled = false;
+      idle-activation-enabled = false;
+    };
+
+    # Power settings - never turn off screen
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-type = "nothing";
+      idle-dim = false;
+    };
+  };
+
+  # GTK dark theme
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+
+  # Qt apps follow GTK dark theme
+  qt = {
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
   };
 }
