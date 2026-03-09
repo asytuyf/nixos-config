@@ -66,6 +66,7 @@
     dates = "weekly";
     flake = "/etc/nixos";
     flags = [ "--update-input" "nixpkgs" ];
+    allowReboot = false;  # Don't reboot automatically after upgrades
   };
 
   # NixOS release version
