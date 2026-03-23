@@ -28,6 +28,9 @@
     home-manager
     dysk
 
+    # Productivity
+    obsidian
+
     # Gaming
     steam
     hydralauncher

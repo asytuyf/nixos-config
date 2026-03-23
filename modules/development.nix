@@ -32,7 +32,7 @@
     # LaTeX (for PDF notes generation)
     (texlive.combine {
       inherit (texlive)
-        scheme-basic
+        scheme-medium
         latex
         xetex
         latexmk
@@ -43,7 +43,14 @@
         geometry
         fancyhdr
         hyperref
-        xcolor;
+        xcolor
+        tcolorbox
+        pgf
+        tikzfill
+        framed
+        mdframed
+        environ
+        etoolbox;
     })
     pandoc
 
